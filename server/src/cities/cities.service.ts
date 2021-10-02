@@ -5,12 +5,12 @@ import { Model } from 'mongoose';
 
 @Injectable()
 export class CitiesService {
-    private cities: City[];
 
     constructor(
         @InjectModel('City') private readonly cityModel: Model<City>
     ){}
 
+    // Getting all cities without prefix
     async getCities(){
 
         const cities = await this.cityModel.find().limit(100);
@@ -18,6 +18,7 @@ export class CitiesService {
         return cities
     }
 
+    // Getting cities with a prefix
     async getCitiesPrefix(prefix: string){
 
         var regexp = new RegExp("^"+ prefix);

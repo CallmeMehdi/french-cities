@@ -1,6 +1,5 @@
-import { Body, Controller, Get, Req, Post, Param } from '@nestjs/common';
+import {  Controller, Get, Param } from '@nestjs/common';
 import { CitiesService } from './cities.service';
-import { Request } from 'express';
 
 @Controller('cities')
 export class CitiesController {
@@ -21,9 +20,6 @@ export class CitiesController {
     getAllCitiesPrefix(
         @Param('prefix') prefix
     ){
-
-        console.log(prefix)
-        // console.log(request)
         return this.citiesService.getCitiesPrefix(prefix);
     }
 }

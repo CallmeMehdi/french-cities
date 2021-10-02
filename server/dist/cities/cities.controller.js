@@ -23,7 +23,6 @@ let CitiesController = class CitiesController {
         return this.citiesService.getCities();
     }
     getAllCitiesPrefix(prefix) {
-        console.log(prefix);
         return this.citiesService.getCitiesPrefix(prefix);
     }
 };
