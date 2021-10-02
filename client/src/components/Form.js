@@ -15,15 +15,18 @@ export default class Form extends Component {
         }
     }
     
+    // Function for when input is changed that sends get request to backend to get cities
     handleCityChange(e){
 
+        // Creating the prefix
         let newCity = e.target.value.toUpperCase()
+        
+        // Changing state of city
         this.setState({city: newCity})
+
+        // Sending request to get all cities for prefix
         axios.get(process.env.REACT_APP_BASE_URL +"/cities/" + newCity)
         .then(res => {
-            console.log(e.target.value)
-
-            console.log(res)
             const cities = res.data;
             this.setState({ selectedCities: cities });
         })
