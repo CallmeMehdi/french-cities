@@ -11,7 +11,14 @@ export class CitiesService {
         @InjectModel('City') private readonly cityModel: Model<City>
     ){}
 
-    async getCities(prefix: string){
+    async getCities(){
+
+        const cities = await this.cityModel.find().limit(100);
+
+        return cities
+    }
+
+    async getCitiesPrefix(prefix: string){
 
         var regexp = new RegExp("^"+ prefix);
 

@@ -20,7 +20,11 @@ let CitiesService = class CitiesService {
     constructor(cityModel) {
         this.cityModel = cityModel;
     }
-    async getCities(prefix) {
+    async getCities() {
+        const cities = await this.cityModel.find().limit(100);
+        return cities;
+    }
+    async getCitiesPrefix(prefix) {
         var regexp = new RegExp("^" + prefix);
         const cities = await this.cityModel.find({
             "libelleAcheminement": regexp

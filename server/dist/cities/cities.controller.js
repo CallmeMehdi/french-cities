@@ -19,17 +19,27 @@ let CitiesController = class CitiesController {
     constructor(citiesService) {
         this.citiesService = citiesService;
     }
-    getAllCities(prefix) {
-        return this.citiesService.getCities(prefix);
+    getAllCities() {
+        return this.citiesService.getCities();
+    }
+    getAllCitiesPrefix(prefix) {
+        console.log(prefix);
+        return this.citiesService.getCitiesPrefix(prefix);
     }
 };
 __decorate([
     (0, common_1.Get)(),
-    __param(0, (0, common_1.Body)('prefix')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
+    __metadata("design:paramtypes", []),
     __metadata("design:returntype", void 0)
 ], CitiesController.prototype, "getAllCities", null);
+__decorate([
+    (0, common_1.Get)('/:prefix'),
+    __param(0, (0, common_1.Param)('prefix')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", void 0)
+], CitiesController.prototype, "getAllCitiesPrefix", null);
 CitiesController = __decorate([
     (0, common_1.Controller)('cities'),
     __metadata("design:paramtypes", [cities_service_1.CitiesService])
