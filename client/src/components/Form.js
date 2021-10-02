@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Input, Box, Text, Flex } from "@chakra-ui/react"
+import { Input, Box, Text, Flex, Center } from "@chakra-ui/react"
 import axios from 'axios';
 
 
@@ -45,9 +45,19 @@ export default class Form extends Component {
                         <Flex justify="center">
                             <Text fontSize="4xl" mr={25}>Ville de metropole</Text>
                         </Flex>
+                        {this.state.selectedCities.length > 0?
+                        <Center>
+                            <Box bg="#6FC676" w="80%" m={5} p={15} color="white" fontSize="12px" fontWeight="normal">{this.state.selectedCities.length} villes correspondant au texte saisi</Box>
+                        </Center>
+                        :
+                        <Center>
+                            <Box bg="#C37678" w="80%" m={5} p={15} color="white" fontSize="12px" fontWeight="normal">Aucune ville correspondant au texte saisi</Box>
+                        </Center>
+                        }
+
                         <div style={{ margin: "auto"}}>
                         {this.state.selectedCities.map(function(city){
-                            return <Box style={{display:"inline-block" }} bg="#5B6670" w="39%" m={5} p={4} color="white" fontSize="12px" fontWeight="normal">
+                            return <Box style={{display:"inline-block" }} bg="#5B6670" w="39%" m={5} p={15} color="white" fontSize="12px" fontWeight="normal">
                             {city.libelleAcheminement}
                           </Box>;
                         })}
