@@ -6,7 +6,7 @@ You can start typing letters in the input bar and the box will show how many cit
 
 Here is a demo of it:
 
-![Demo](https://giphy.com/gifs/KCC9GglQK9gzGGkprY)
+![Demo](https://s9.gifyu.com/images/recordinga35b25226018ad25.gif)
 
 
 
