@@ -37,6 +37,8 @@ export class CitiesService {
     // Getting cities with a prefix
     async getCitiesPrefix(prefix: string){
 
+        prefix = prefix.toUpperCase();
+        
         let regexp = new RegExp("^"+ prefix);
 
         // Getting Metropole Cities that start with prefix
@@ -49,7 +51,7 @@ export class CitiesService {
 
 
         // Getting cities outre mer that start with prefix
-        let regexpOther = new RegExp("^[^ 97]");
+        let regexpOther = new RegExp("^97");
 
         const otherCities = await this.cityModel.find({
             "libelleAcheminement": regexp,

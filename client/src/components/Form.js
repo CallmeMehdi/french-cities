@@ -11,7 +11,8 @@ export default class Form extends Component {
         
         this.state = {
             city: '',
-            selectedCities: []
+            selectedMetropoleCities: [],
+            selectedOtherCities: []
         }
     }
     
@@ -19,7 +20,7 @@ export default class Form extends Component {
     handleCityChange(e){
 
         // Creating the prefix
-        let newCity = e.target.value.toUpperCase()
+        let newCity = e.target.value
         
         // Changing state of city
         this.setState({city: newCity})
@@ -28,7 +29,7 @@ export default class Form extends Component {
         axios.get(process.env.REACT_APP_BASE_URL +"/cities/" + newCity)
         .then(res => {
             const cities = res.data;
-            this.setState({ selectedCities: cities });
+            this.setState({ selectedMetropoleCities: cities["metropoleCities"], selectedOtherCities: cities["otherCities"] });
         })
     }
 
@@ -48,9 +49,9 @@ export default class Form extends Component {
                         <Flex justify="center">
                             <Text fontSize="4xl" mr={25}>Ville de metropole</Text>
                         </Flex>
-                        {this.state.selectedCities.length > 0?
+                        {this.state.selectedMetropoleCities.length > 0?
                         <Center>
-                            <Box bg="#6FC676" w="80%" m={5} p={15} color="white" fontSize="12px" fontWeight="normal">{this.state.selectedCities.length} villes correspondant au texte saisi</Box>
+                            <Box bg="#6FC676" w="80%" m={5} p={15} color="white" fontSize="12px" fontWeight="normal">{this.state.selectedMetropoleCities.length} villes correspondant au texte saisi</Box>
                         </Center>
                         :
                         <Center>
@@ -59,9 +60,9 @@ export default class Form extends Component {
                         }
 
                         <div style={{ margin: "auto"}}>
-                        {this.state.selectedCities.map(function(city){
+                        {this.state.selectedMetropoleCities.map(function(city){
                             return <Box style={{display:"inline-block" }} bg="#5B6670" w="39%" m={5} p={15} color="white" fontSize="12px" fontWeight="normal">
-                            {city.libelleAcheminement}
+                            {city.nomCommune}
                           </Box>;
                         })}
                         </div>
@@ -70,6 +71,23 @@ export default class Form extends Component {
                         <Flex justify="center">
                             <Text fontSize="4xl" mr={25}>Ville d'outre-mer</Text>
                         </Flex>
+                        {this.state.selectedOtherCities.length > 0?
+                        <Center>
+                            <Box bg="#6FC676" w="80%" m={5} p={15} color="white" fontSize="12px" fontWeight="normal">{this.state.selectedOtherCities.length} villes correspondant au texte saisi</Box>
+                        </Center>
+                        :
+                        <Center>
+                            <Box bg="#C37678" w="80%" m={5} p={15} color="white" fontSize="12px" fontWeight="normal">Aucune ville correspondant au texte saisi</Box>
+                        </Center>
+                        }
+
+                        <div style={{ margin: "auto"}}>
+                        {this.state.selectedOtherCities.map(function(city){
+                            return <Box style={{display:"inline-block" }} bg="#5B6670" w="39%" m={5} p={15} color="white" fontSize="12px" fontWeight="normal">
+                            {city.nomCommune}
+                          </Box>;
+                        })}
+                        </div>
                     </Box>
                 </Flex>
             </div>
