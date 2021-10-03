@@ -6,7 +6,7 @@ import { CitiesModule } from './cities/cities.module';
 
 @Module({
   imports: [MongooseModule.forRoot(
-    'mongourl'
+    'mongodburl'
     ), CitiesModule],
   controllers: [AppController],
   providers: [AppService],

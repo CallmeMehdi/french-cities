@@ -21,15 +21,36 @@ let CitiesService = class CitiesService {
         this.cityModel = cityModel;
     }
     async getCities() {
-        const cities = await this.cityModel.find().limit(100);
-        return cities;
+        let regexpMetropole = new RegExp("^[^ 97]");
+        const metropoleCities = await this.cityModel.find({
+            "codePostal": regexpMetropole
+        }).limit(100);
+        let regexpOther = new RegExp("^97");
+        const otherCities = await this.cityModel.find({
+            "codePostal": regexpOther
+        }).limit(100);
+        return {
+            "metropoleCities": metropoleCities,
+            "otherCities": otherCities
+        };
     }
     async getCitiesPrefix(prefix) {
-        var regexp = new RegExp("^" + prefix);
-        const cities = await this.cityModel.find({
-            "libelleAcheminement": regexp
+        prefix = prefix.toUpperCase();
+        let regexp = new RegExp("^" + prefix);
+        let regexpMetropole = new RegExp("^[^ 97]");
+        const metropoleCities = await this.cityModel.find({
+            "libelleAcheminement": regexp,
+            "codePostal": regexpMetropole
         }).limit(100);
-        return cities;
+        let regexpOther = new RegExp("^97");
+        const otherCities = await this.cityModel.find({
+            "libelleAcheminement": regexp,
+            "codePostal": regexpOther
+        }).limit(100);
+        return {
+            "metropoleCities": metropoleCities,
+            "otherCities": otherCities
+        };
     }
 };
 CitiesService = __decorate([
