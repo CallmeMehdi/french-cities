@@ -19,10 +19,22 @@ const mongoose_2 = require("mongoose");
 let CitiesService = class CitiesService {
     constructor(cityModel) {
         this.cityModel = cityModel;
+        this.metropoleCities = [];
+        this.otherCities = [];
     }
     async getCities() {
-        const cities = await this.cityModel.find().limit(100);
-        return cities;
+        var regexp = new RegExp("^[^ 97]");
+        const metropoleCities = await this.cityModel.find({
+            "codePostal": regexp
+        }).limit(100);
+        var regexpother = new RegExp("^97");
+        const othereCities = await this.cityModel.find({
+            "codePostal": regexpother
+        }).limit(100);
+        return {
+            "metropoleCities": metropoleCities,
+            "otherCities": othereCities
+        };
     }
     async getCitiesPrefix(prefix) {
         var regexp = new RegExp("^" + prefix);

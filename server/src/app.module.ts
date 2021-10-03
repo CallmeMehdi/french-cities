@@ -6,7 +6,7 @@ import { CitiesModule } from './cities/cities.module';
 
 @Module({
   imports: [MongooseModule.forRoot(
-    'mongodb+srv://root:root@cluster0.xylmi.mongodb.net/graneet?retryWrites=true&w=majority'
+    'mongodburl'
     ), CitiesModule],
   controllers: [AppController],
   providers: [AppService],
